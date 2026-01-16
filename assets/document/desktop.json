@@ -1,0 +1,55 @@
+{
+  "document": {
+    "type": "page",
+    "children": [
+      {
+        "type": "heading",
+        "data": {
+          "delta": [
+            {
+              "insert": "Quote of the day:"
+            }
+          ],
+          "level": 3,
+          "align": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "data": {
+          "delta": [
+            {
+              "insert": "My thoughts of the day:"
+            }
+          ],
+          "level": 4,
+          "align": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "data": {
+          "delta": [
+            {
+              "insert": "Gratitudes of the day :"
+            }
+          ],
+          "level": 4,
+          "align": "left"
+        }
+      },
+      {
+        "type": "heading",
+        "data": {
+          "delta": [
+            {
+              "insert": "Photo of the day :"
+            }
+          ],
+          "level": 4,
+          "align": "left"
+        }
+      }
+    ]
+  }
+}
