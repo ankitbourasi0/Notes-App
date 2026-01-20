@@ -40,7 +40,7 @@ dependencies:
   path: ^1.9.0
   appflowy_editor: ^6.2.0
   intl: ^0.20.0
-
+  google_fonts: 
 
 dev_dependencies:
   flutter_test:

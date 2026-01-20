@@ -2,6 +2,7 @@ import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class EditorWidget extends StatefulWidget {
   const EditorWidget({super.key});
@@ -13,11 +14,13 @@ class EditorWidget extends StatefulWidget {
 class _EditorWidgetState extends State<EditorWidget> {
   EditorState? _editorState;
   late final EditorScrollController editorScrollController;
+  late Map<String, BlockComponentBuilder> buildBlockComponentBuilder;
   bool _isLoading = true;
   @override
   void initState() {
     super.initState();
     initData();
+        buildBlockComponentBuilder = _buildBlockComponentBuilder();
   }
 
   Future<void> initData() async {
@@ -78,6 +81,38 @@ class _EditorWidgetState extends State<EditorWidget> {
             child: AppFlowyEditor(
               editorState: _editorState!,
               editorScrollController: editorScrollController,
+              blockComponentBuilders: buildBlockComponentBuilder,
             )));
   }
+}
+
+//customize the block style
+Map<String, BlockComponentBuilder> _buildBlockComponentBuilder() {
+  final map = {
+    ...standardBlockComponentBuilderMap,
+    //column block
+    ColumnBlockKeys.type: ColumnBlockComponentBuilder(),
+    ColumnsBlockKeys.type: ColumnBlockComponentBuilder()
+  };
+
+  //customize the image block component to show a menu
+  map[ImageBlockKeys.type] = ImageBlockComponentBuilder(
+      showMenu: true,
+      menuBuilder: (node, _) {
+        return const Positioned(
+          right: 10,
+          child: Text(""),
+        );
+      });
+
+  //customize the heading block component
+  final levelToFontSize = [14.0, 16.0, 18.0, 22.0, 26.0, 30.0];
+
+  map[HeadingBlockKeys.type] = HeadingBlockComponentBuilder(
+    textStyleBuilder: (level) => GoogleFonts.poppins(
+      fontSize: levelToFontSize.elementAtOrNull(level - 1) ?? 14.0,
+      fontWeight: FontWeight.w600,
+    ),
+  );
+  return map;
 }
