@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "364731760131",
+    "project_id": "refine-journal-2026",
+    "storage_bucket": "refine-journal-2026.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364731760131:android:033c1175f3acab38021836",
+        "android_client_info": {
+          "package_name": "com.bourasi.notes_app_sync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCs3J6tmn4O6ycYKxuSOR4nhj_ePTHPtOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
