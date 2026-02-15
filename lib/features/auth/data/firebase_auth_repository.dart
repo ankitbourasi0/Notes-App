@@ -13,13 +13,13 @@ class FirebaseAuthRepository implements AuthRepository {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   @override
-  Future<AppUser> loginWithEmailPassword(String email, String password) async {
+  Future<AppUser?> loginWithEmailPassword(String email, String password) async {
     try {
       //Attempt to sign in
       UserCredential userCredential = await firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       //create user
-      AppUser user = AppUser(
+      AppUser? user = AppUser(
           uid: userCredential.user!.uid, email: userCredential.user!.email!);
    
     //return user
@@ -41,7 +41,7 @@ class FirebaseAuthRepository implements AuthRepository {
       AppUser user = AppUser(
           uid: userCredential.user!.uid, email: userCredential.user!.email!);
    
-    //return user
+    //return user 
     return user;
     } catch (e) {
       print(e);
