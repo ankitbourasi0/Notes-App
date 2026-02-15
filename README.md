@@ -1,16 +1,15 @@
-# notes_app_sync
+## Refine Journal 2026
 
-A Notes App Clone of Ios, Build for Testing Local Encryption using QR
+Refine Journal is an Open-Source Journaling App, Supports Encryption, Local First Data, Passwordless Sync.
 
-## Getting Started
+### Features
+1. Open Source
+2. Local First(Your Data always with your device)
+3. Highly Encrypted(No one can read your data)
+4. Password Less Sync(No one can hack your data while sync)
+ 
+### Dependencies
+-  Flutter 
+-  Firebase
+-  BLoc
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
