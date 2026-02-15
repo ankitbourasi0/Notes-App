@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:notes_app_sync/screens/editor_widget.dart';
+import 'package:notes_app_sync/features/auth/presentation/pages/auth_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:notes_app_sync/themes/dark_mode.dart';
+import 'package:notes_app_sync/themes/light_mode.dart';
 import 'firebase_options.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
   runApp(const MyWidget());
@@ -22,7 +23,7 @@ final GoRouter _router = GoRouter(routes: <RouteBase>[
         GoRoute(
           path: "/details",
           builder: (context, state) {
-            return const DetailsScreen();
+            return const AuthPage();
           },
         )
       ]),
@@ -95,7 +96,12 @@ class MyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(routerConfig: _router);
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: _router,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+    );
   }
 }
 

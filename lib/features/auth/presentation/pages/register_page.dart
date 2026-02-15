@@ -15,22 +15,25 @@ import 'package:flutter/material.dart';
 import 'package:notes_app_sync/features/auth/presentation/components/my_button.dart';
 import 'package:notes_app_sync/features/auth/presentation/components/my_textfield.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final void Function()? togglePage;
-
-  const LoginPage({super.key, required this.togglePage});
+  const RegisterPage({super.key, required this.togglePage});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -40,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       //APP BAR
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Register"),
       ),
       //BODY
       body: Center(
@@ -61,14 +64,23 @@ class _LoginPageState extends State<LoginPage> {
               ),
 
               Text(
-                "R E F I N E   J O U R N A L",
+                "Let's create an account for you",
                 style: TextStyle(
                     fontSize: 16,
                     color: Theme.of(context).colorScheme.inversePrimary),
               ),
+
               const SizedBox(
                 height: 25,
               ),
+              MyTextfield(
+                  controller: nameController,
+                  hintText: "Name",
+                  obscureText: false),
+              const SizedBox(
+                height: 10,
+              ),
+
               //Email Text Field
 
               MyTextfield(
@@ -89,24 +101,17 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
 
-              //Forget password
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Forget Password?",
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
+              //Confirm Password Text Field
+              MyTextfield(
+                  controller: confirmPasswordController,
+                  hintText: "Confirm Password",
+                  obscureText: true),
 
               const SizedBox(
                 height: 10,
               ),
               //Login Button
-              MyButton(onTap: () {}, text: 'LOGIN'),
+              MyButton(onTap: () {}, text: 'SIGN UP'),
               const SizedBox(
                 height: 25,
               ),
@@ -116,14 +121,14 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Don't have an account?",
+                    "Already have an account?",
                     style:
                         TextStyle(color: Theme.of(context).colorScheme.primary),
                   ),
                   GestureDetector(
                     onTap: widget.togglePage,
                     child: Text(
-                      " Register Now",
+                      " Login Now",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.primary),
