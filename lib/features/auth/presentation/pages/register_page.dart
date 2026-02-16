@@ -12,8 +12,10 @@ If user doesn't have an account , they can go to register page to create one.
 */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app_sync/features/auth/presentation/components/my_button.dart';
 import 'package:notes_app_sync/features/auth/presentation/components/my_textfield.dart';
+import 'package:notes_app_sync/features/auth/presentation/cubits/auth_cubits.dart';
 
 class RegisterPage extends StatefulWidget {
   final void Function()? togglePage;
@@ -28,6 +30,34 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  //register button pressed
+  void register() {
+    //prepare info
+    final String name = nameController.text;
+    final String email = emailController.text;
+    final String password = passwordController.text;
+    final String confirmPassword = confirmPasswordController.text;
+
+    //auth cubit
+    final authCubit = context.read<AuthCubit>();
+
+    // ensure fields aren't empty
+    if (email.isNotEmpty && password.isNotEmpty && confirmPassword.isNotEmpty) {
+      //ensure password match
+      if (password == confirmPassword) {
+        authCubit.register(name, email, password);
+      } else {
+        //passwords don't match
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Passwords don't match")));
+      }
+    } else {
+      //Fields are empty -> display error
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please complete all fields!")));
+    }
+  }
 
   @override
   void dispose() {
@@ -111,7 +141,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 10,
               ),
               //Login Button
-              MyButton(onTap: () {}, text: 'SIGN UP'),
+              MyButton(onTap: register , text: 'SIGN UP'),
               const SizedBox(
                 height: 25,
               ),

@@ -12,8 +12,10 @@ If user doesn't have an account , they can go to register page to create one.
 */
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app_sync/features/auth/presentation/components/my_button.dart';
 import 'package:notes_app_sync/features/auth/presentation/components/my_textfield.dart';
+import 'package:notes_app_sync/features/auth/presentation/cubits/auth_cubits.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function()? togglePage;
@@ -27,6 +29,31 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  //login button
+  void login() {
+    //prepare email and password
+    final String email = emailController.text;
+    final String password = passwordController.text;
+
+    //auth cubit
+    final authcubit = context.read<AuthCubit>();
+
+    //ensure all fields are filled
+    if (email.isNotEmpty && password.isNotEmpty) {
+      if (email.contains("@")) {
+        //login
+         authcubit.login(email, password);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Enter a valid email address")));
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please enter both email & password.")));
+    }
+  }
+
   @override
   void dispose() {
     emailController.dispose();
@@ -106,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 10,
               ),
               //Login Button
-              MyButton(onTap: () {}, text: 'LOGIN'),
+              MyButton(onTap: login, text: 'LOGIN'),
               const SizedBox(
                 height: 25,
               ),
